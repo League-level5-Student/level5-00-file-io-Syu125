@@ -20,11 +20,20 @@ public class FileDecryptor {
 			}
 			char[] given = s.toCharArray();
 			String message = "";
-			for (int i = 0; i < given.length / 2 ; i++) {
+			if(given.length%2 == 0) {
+				for (int i = 0; i < given.length / 2; i++) {
 				char temp = given[i];
 				given[i] = given[given.length - i - 1];
 				given[given.length - i - 1] = temp;
 			}
+			}else {
+				for (int i = 0; i < given.length / 2 +1; i++) {
+					char temp = given[i];
+					given[i] = given[given.length - i - 1];
+					given[given.length - i - 1] = temp;
+				}
+			}
+			
 			for (char ch : given) {
 				message = message.concat(String.valueOf(ch));
 			}

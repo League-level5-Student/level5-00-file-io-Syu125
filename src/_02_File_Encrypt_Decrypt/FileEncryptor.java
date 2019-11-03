@@ -14,11 +14,20 @@ public class FileEncryptor {
 			FileWriter fw = new FileWriter("src/_02_File_Encrypt_Decrypt/message.txt");
 			String message = JOptionPane.showInputDialog("Write a message");
 			char[] c = message.toCharArray();
-			for (int i = 0; i < c.length / 2 + 1; i++) {
-				char temp = c[i];
-				c[i] = c[c.length - 1 - i];
-				c[c.length - 1 - i] = temp;
+			if (message.length() % 2 == 0) {
+				for (int i = 0; i < c.length / 2; i++) {
+					char temp = c[i];
+					c[i] = c[c.length - 1 - i];
+					c[c.length - 1 - i] = temp;
+				}
+			} else {
+				for (int i = 0; i < c.length / 2 + 1; i++) {
+					char temp = c[i];
+					c[i] = c[c.length - 1 - i];
+					c[c.length - 1 - i] = temp;
+				}
 			}
+
 			fw.write(c);
 			fw.close();
 		} catch (IOException e) {
