@@ -18,7 +18,8 @@ public class GridPanel extends JPanel {
 	private int rows;
 	private int cols;
 
-	public int[][][] pNum;
+	public int[][] pNum;
+
 
 	// 1. Create a 2D array of pixels. Do not initialize it yet.
 	Pixel[][] p;
@@ -38,7 +39,7 @@ public class GridPanel extends JPanel {
 
 		// 2. Initialize the pixel array using the rows and cols variables.
 		p = new Pixel[rows][cols];
-		pNum = new int[rows][cols][3];
+		pNum = new int[rows][cols];
 		// 3. Iterate through the array and initialize each element to a new pixel.
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
@@ -56,11 +57,9 @@ public class GridPanel extends JPanel {
 		// 5. Use the mouseX and mouseY variables to change the color
 		// of the pixel that was clicked. *HINT* Use the pixel's dimensions.
 		p[mouseX / pixelWidth][mouseY / pixelHeight].color = color;
-		System.out.println(mouseX / pixelWidth + "," + mouseY / pixelHeight);
-		System.out.println(color);
-		pNum[mouseX / pixelWidth][mouseY / pixelHeight][0] = color.getRed();
-		pNum[mouseX / pixelWidth][mouseY / pixelHeight][1] = color.getGreen();
-		pNum[mouseX / pixelWidth][mouseY / pixelHeight][2] = color.getBlue();
+		//System.out.println(mouseX / pixelWidth + "," + mouseY / pixelHeight);
+		//System.out.println(color);
+		pNum[mouseX / pixelWidth][mouseY / pixelHeight] = color.getRGB();
 	}
 
 	@Override
@@ -84,10 +83,8 @@ public class GridPanel extends JPanel {
 			FileWriter fw = new FileWriter("src/_05_Pixel_Art_Save_State/art.txt");
 			for (int i = 0; i < pNum.length; i++) {
 				for (int j = 0; j < pNum[i].length; j++) {
-					for (int h = 0; h < pNum[i][j].length; h++) {
-					//	fw.write(pNum[i][j][h]);
-						System.out.println(pNum[i][j][h]+"\n");
-					}
+					fw.write(pNum[i][j]);
+					System.out.println(pNum[i][j]);
 				}
 			}
 			fw.close();
@@ -95,5 +92,11 @@ public class GridPanel extends JPanel {
 			e1.printStackTrace();
 		}
 
+	}
+	public void pic(int[][][] pixels) {
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[i].length; j++) {
+			}
+		}
 	}
 }

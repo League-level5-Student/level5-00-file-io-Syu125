@@ -3,6 +3,9 @@ package _05_Pixel_Art_Save_State;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +17,12 @@ public class PixelArtMaker implements MouseListener{
 	ColorSelectionPanel csp;
 	
 	public void start() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("src/_05_Pixel_Art_Save_State/art.txt"));
+			
+		}catch (IOException e){
+		
+		}
 		gip = new GridInputPanel(this);	
 		window = new JFrame("Pixel Art");
 		window.setLayout(new FlowLayout());
@@ -40,6 +49,7 @@ public class PixelArtMaker implements MouseListener{
 	public static void main(String[] args) {
 		new PixelArtMaker().start();
 	}
+	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -65,4 +75,5 @@ public class PixelArtMaker implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
+	
 }
