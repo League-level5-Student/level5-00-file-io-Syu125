@@ -47,22 +47,7 @@ public class ToDoList implements MouseListener {
 	public static void main(String[] args) {
 		ToDoList l = new ToDoList();
 		l.setup();
-		try {
-			BufferedReader b = new BufferedReader(new FileReader("src/_03_To_Do_List/list.txt"));
-			String st = b.readLine();
-			ArrayList <String> nList = new ArrayList <String>();
-			while(st != null) {
-				nList.add(st);
-				st = b.readLine();
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	void setup() {
 		String[] title = { "Add Task", "View Tasks", "Remove Task", "Save List", "Load List" };
@@ -78,15 +63,28 @@ public class ToDoList implements MouseListener {
 		f.setVisible(true);
 		f.addMouseListener(this);
 		f.pack();
+		
+		try {
+			BufferedReader b = new BufferedReader(new FileReader("src/_03_To_Do_List/list.txt"));
+			String s = b.readLine();
+			while(s != null) {
+				list.add(s);
+				s = b.readLine();
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	void addTask() {
 		String task = JOptionPane.showInputDialog("Insert a task");
 		list.add(task);
-		updateList();
 	}
 	void viewTasks() {
-		view = true;
 		updateList();
 	}
 	void removeTask() {
@@ -97,35 +95,26 @@ public class ToDoList implements MouseListener {
 				list.remove(i);
 			}
 		}
-		updateList();
 	}
 	void saveList() {
-		
+		try {
+			FileWriter f = new FileWriter("src/_03_To_Do_List/list.txt");
+			for(String s: list) {
+				f.write(s +"\n");
+			}
+			f.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	void loadList() {
 		
 	}
 	void updateList() {
-		try {
-			if(view) {
-				BufferedReader br = new BufferedReader(new FileReader("src/_03_To_Do_List/list.txt"));
-				String s = br.readLine();
-				while(s != null) {
-					System.out.println(s);
-					s = br.readLine();
-				}
-				System.out.println();
-				view = false;
-			}
-			FileWriter fw = new FileWriter("src/_03_To_Do_List/list.txt");
-			for(String s: list) {
-				fw.write(s +"\n");
-			}
-			fw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (String s  : list) {
+			System.out.println(s);
 		}
+		
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -143,7 +132,6 @@ public class ToDoList implements MouseListener {
 		switch (n) {
 		case 0:
 			addTask();
-			updateList();
 			break;
 		case 1:
 			viewTasks();
