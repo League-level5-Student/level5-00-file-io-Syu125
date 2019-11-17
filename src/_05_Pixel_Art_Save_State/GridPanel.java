@@ -60,6 +60,7 @@ public class GridPanel extends JPanel {
 		//System.out.println(mouseX / pixelWidth + "," + mouseY / pixelHeight);
 		//System.out.println(color);
 		pNum[mouseX / pixelWidth][mouseY / pixelHeight] = color.getRGB();
+		//System.out.println("RGB: " + pNum[mouseX / pixelWidth][mouseY / pixelHeight]);
 	}
 
 	@Override
@@ -84,7 +85,7 @@ public class GridPanel extends JPanel {
 			for (int i = 0; i < pNum.length; i++) {
 				for (int j = 0; j < pNum[i].length; j++) {
 					fw.write(pNum[i][j]);
-					System.out.println(pNum[i][j]);
+					System.out.println("pixel: " + pNum[i][j]);
 				}
 			}
 			fw.close();
@@ -96,6 +97,7 @@ public class GridPanel extends JPanel {
 	public void pic(int[][][] pixels) {
 		for (int i = 0; i < pixels.length; i++) {
 			for (int j = 0; j < pixels[i].length; j++) {
+				
 			}
 		}
 	}
